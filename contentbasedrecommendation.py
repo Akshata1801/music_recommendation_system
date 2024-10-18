@@ -39,11 +39,10 @@ def content_based_recommendations(input_song_name, num_recommendations=5):
     similar_song_indices = similarity_scores.argsort()[0][::-1][1:num_recommendations + 1]
 
     # Get the names of the most similar songs based on content-based filtering
-    content_based_recommendations = music_df.iloc[similar_song_indices][['Track Name',
-                                                                         'Artists',
-                                                                         'Album Name',
-                                                                         'Release Date',
-                                                                         'Popularity']]
+    content_based_recommendations = music_df.iloc[similar_song_indices][['name',
+                                                                         'artists',
+                                                                         'relase_date',
+                                                                         'popularity']]
 
     return content_based_recommendations
 
