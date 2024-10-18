@@ -25,7 +25,7 @@ music_features = music_df[['danceability',
 music_features_scaled = scaler.fit_transform(music_features)
 print("music features scaled")
 print(music_features_scaled)
-music_features_scaled = music_features_scaled.fillna(0)
+music_features_scaled[np.isnan(music_features_scaled)]=0
 
 def content_based_recommendations(input_song_name, num_recommendations=5):
     if input_song_name not in music_df['name'].values:
