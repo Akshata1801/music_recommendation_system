@@ -65,21 +65,43 @@ def main_area():
     col1, col2, col3, col4, col5 = st.columns(5)
     # Song Card 1
     with col1:
+      st.image("https://via.placeholder.com/150", caption="Song 1", use_column_width=True)
       st.write("Song 1")
       st.write("Name : " + df['name'][0])
-      st.write("Artist : "+df['popularity'][0])
+      st.write("Artist : "+df['artists'][0])
+      st.write("Popularity : "+str(df['popularity'][0]))
     
     # Song Card 2
     with col2:
+      st.image("https://via.placeholder.com/150", caption="Song 2", use_column_width=True)
       st.write("Song 2")
       st.write("Name : " + df['name'][1])
-      st.write("Artist : "+df['popularity'][1])
+      st.write("Artist : "+df['artists'][1])
+      st.write("popularity : "+str(df['popularity'][1]))
     
     # Song Card 3
     with col3:
-        st.image("https://via.placeholder.com/150", caption="Song 3", use_column_width=True)
-        if st.button("Play Song 3"):
-            st.write("Playing Song 3")
+      st.image("https://via.placeholder.com/150", caption="Song 3", use_column_width=True)
+      st.write("Song 3")
+      st.write("Name : " + df['name'][2])
+      st.write("Artist : "+df['artists'][2])
+      st.write("popularity : "+str(df['popularity'][2]))
+    
+    # Song Card 4
+    with col3:
+      st.image("https://via.placeholder.com/150", caption="Song 4", use_column_width=True)
+      st.write("Song 4")
+      st.write("Name : " + df['name'][3])
+      st.write("Artist : "+df['artists'][3])
+      st.write("popularity : "+str(df['popularity'][3]))
+
+    # Song Card 3
+    with col3:
+      st.image("https://via.placeholder.com/150", caption="Song 5", use_column_width=True)
+      st.write("Song 5")
+      st.write("Name : " + df['name'][5])
+      st.write("Artist : "+df['artists'][5])
+      st.write("popularity : "+str(df['popularity'][5]))
 
 # --------- Footer ---------
 def footer():
