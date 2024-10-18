@@ -23,7 +23,7 @@ music_features = music_df[['danceability',
                            'valence',
                            'tempo']].values
 music_features_scaled = scaler.fit_transform(music_features)
-print(music_features_scaled.head(5))
+print(music_features_scaled)
 
 def content_based_recommendations(input_song_name, num_recommendations=5):
     if input_song_name not in music_df['name'].values:
@@ -32,7 +32,7 @@ def content_based_recommendations(input_song_name, num_recommendations=5):
 
     # Get the index of the input song in the music DataFrame
     input_song_index = music_df[music_df['name'] == input_song_name].index[0]
-    # print(music_features_scaled[input_song_index])
+    print(music_features_scaled[input_song_index])
 
     # Calculate the similarity scores based on music features (cosine similarity)
     similarity_scores = cosine_similarity([music_features_scaled[input_song_index]], music_features_scaled)
