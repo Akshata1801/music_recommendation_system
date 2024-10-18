@@ -75,9 +75,9 @@ def main_area():
     with col2:
       st.image("https://via.placeholder.com/150", caption="Song 2", use_column_width=True)
       st.write("Song 2")
-      st.write("Name : " + df['name'][1])
-      st.write("Artist : "+df['artists'][1])
-      st.write("popularity : "+str(df['popularity'][1]))
+      st.write("Name : " + df.iloc[1]['name'])
+      st.write("Artist : "+df.iloc[1]['artists'])
+      st.write("popularity : "+str(df.iloc[1]['popularity']))
     
     # Song Card 3
     with col3:
