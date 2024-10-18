@@ -88,7 +88,7 @@ def main_area():
       st.write("popularity : "+str(df.iloc[2]['popularity']))
     
     # Song Card 4
-    with col3:
+    with col4:
       st.image("music_11705439.png", caption="Song 4", use_column_width=True)
       st.write("Song 4")
       st.write("Name : " + df.iloc[3]['name'])
@@ -96,7 +96,7 @@ def main_area():
       st.write("popularity : "+str(df.iloc[3]['popularity']))
 
     # Song Card 5
-    with col3:
+    with col5:
       st.image("music_11705439.png", caption="Song 5", use_column_width=True)
       st.write("Song 5")
       st.write("Name : " + df.iloc[4]['name'])
