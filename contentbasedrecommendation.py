@@ -83,25 +83,25 @@ def main_area():
     with col3:
       st.image("https://via.placeholder.com/150", caption="Song 3", use_column_width=True)
       st.write("Song 3")
-      st.write("Name : " + df['name'][2])
-      st.write("Artist : "+df['artists'][2])
-      st.write("popularity : "+str(df['popularity'][2]))
+      st.write("Name : " + df.iloc[2]['name'])
+      st.write("Artist : "+df.iloc[2]['artists'])
+      st.write("popularity : "+str(df.iloc[2]['popularity']))
     
     # Song Card 4
     with col3:
-      st.image("https://via.placeholder.com/150", caption="Song 4", use_column_width=True)
+      st.image("/content/drive/MyDrive/Colab Notebooks/music_recommendation_system/music_recommendation_system/music_11705439.png", caption="Song 4", use_column_width=True)
       st.write("Song 4")
-      st.write("Name : " + df['name'][3])
-      st.write("Artist : "+df['artists'][3])
-      st.write("popularity : "+str(df['popularity'][3]))
+      st.write("Name : " + df.iloc[3]['name'])
+      st.write("Artist : "+df.iloc[3]['artists'])
+      st.write("popularity : "+str(df.iloc[3]['popularity']))
 
-    # Song Card 3
+    # Song Card 5
     with col3:
       st.image("https://via.placeholder.com/150", caption="Song 5", use_column_width=True)
       st.write("Song 5")
-      st.write("Name : " + df['name'][5])
-      st.write("Artist : "+df['artists'][5])
-      st.write("popularity : "+str(df['popularity'][5]))
+      st.write("Name : " + df.iloc[4]['name'])
+      st.write("Artist : "+df.iloc[4]['artists'])
+      st.write("popularity : "+str(df.iloc[4]['popularity']))
 
 # --------- Footer ---------
 def footer():
