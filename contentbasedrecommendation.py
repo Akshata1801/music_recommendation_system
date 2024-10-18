@@ -43,7 +43,7 @@ def content_based_recommendations(input_song_name, num_recommendations=5):
     
 
     # Calculate the similarity scores based on music features (cosine similarity)
-    similarity_scores = cosine_similarity([music_features_scaled[input_song_index]], music_features_scaled,nan_policy='propagate')
+    similarity_scores = cosine_similarity([music_features_scaled[input_song_index]], music_features_scaled)
 
     # Get the indices of the most similar songs
     similar_song_indices = similarity_scores.argsort()[0][::-1][1:num_recommendations + 1]
