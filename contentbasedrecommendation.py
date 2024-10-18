@@ -7,6 +7,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import streamlit as st
 
 music_df = pd.read_csv("data.csv")
+music_df = music_df.fillna(0)
 
 # Normalize the music features using Min-Max scaling
 scaler = MinMaxScaler()
@@ -24,6 +25,7 @@ music_features = music_df[['danceability',
 music_features_scaled = scaler.fit_transform(music_features)
 print("music features scaled")
 print(music_features_scaled)
+music_features_scaled = music_features_scaled.fillna(0)
 
 def content_based_recommendations(input_song_name, num_recommendations=5):
     if input_song_name not in music_df['name'].values:
@@ -38,9 +40,10 @@ def content_based_recommendations(input_song_name, num_recommendations=5):
     print("found matches")
     print(music_features_scaled[input_song_index])
     print(music_features_scaled)
+    
 
     # Calculate the similarity scores based on music features (cosine similarity)
-    similarity_scores = cosine_similarity([music_features_scaled[input_song_index]], music_features_scaled)
+    similarity_scores = cosine_similarity([music_features_scaled[input_song_index]], music_features_scaled,nan_policy='propagate')
 
     # Get the indices of the most similar songs
     similar_song_indices = similarity_scores.argsort()[0][::-1][1:num_recommendations + 1]
