@@ -7,6 +7,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import streamlit as st
 
 music_df = pd.read_csv("data.csv")
+print(music_df.head(5))
 
 # Normalize the music features using Min-Max scaling
 scaler = MinMaxScaler()
