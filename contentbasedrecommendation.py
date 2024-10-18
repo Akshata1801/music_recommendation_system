@@ -65,7 +65,7 @@ def main_area():
     col1, col2, col3, col4, col5 = st.columns(5)
     # Song Card 1
     with col1:
-      st.image("https://via.placeholder.com/150", caption="Song 1", use_column_width=True)
+      st.image("music_11705439.png", caption="Song 1", use_column_width=True)
       st.write("Song 1")
       st.write("Name : " + df['name'][0])
       st.write("Artist : "+df['artists'][0])
@@ -73,7 +73,7 @@ def main_area():
     
     # Song Card 2
     with col2:
-      st.image("https://via.placeholder.com/150", caption="Song 2", use_column_width=True)
+      st.image("music_11705439.png", caption="Song 2", use_column_width=True)
       st.write("Song 2")
       st.write("Name : " + df.iloc[1]['name'])
       st.write("Artist : "+df.iloc[1]['artists'])
@@ -81,7 +81,7 @@ def main_area():
     
     # Song Card 3
     with col3:
-      st.image("https://via.placeholder.com/150", caption="Song 3", use_column_width=True)
+      st.image("music_11705439.png", caption="Song 3", use_column_width=True)
       st.write("Song 3")
       st.write("Name : " + df.iloc[2]['name'])
       st.write("Artist : "+df.iloc[2]['artists'])
@@ -97,7 +97,7 @@ def main_area():
 
     # Song Card 5
     with col3:
-      st.image("https://via.placeholder.com/150", caption="Song 5", use_column_width=True)
+      st.image("music_11705439.png", caption="Song 5", use_column_width=True)
       st.write("Song 5")
       st.write("Name : " + df.iloc[4]['name'])
       st.write("Artist : "+df.iloc[4]['artists'])
