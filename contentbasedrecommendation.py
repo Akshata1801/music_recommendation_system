@@ -29,6 +29,9 @@ def content_based_recommendations(input_song_name, num_recommendations=5):
     if input_song_name not in music_df['name'].values:
         print(f"'{input_song_name}' not found in the dataset. Please enter a valid song name.")
         return
+    else:
+      print("found")  
+      
 
     # Get the index of the input song in the music DataFrame
     input_song_index = music_df[music_df['name'] == input_song_name].index[0]
