@@ -89,7 +89,7 @@ def main_area():
     
     # Song Card 4
     with col3:
-      st.image("/content/drive/MyDrive/Colab Notebooks/music_recommendation_system/music_recommendation_system/music_11705439.png", caption="Song 4", use_column_width=True)
+      st.image("music_11705439.png", caption="Song 4", use_column_width=True)
       st.write("Song 4")
       st.write("Name : " + df.iloc[3]['name'])
       st.write("Artist : "+df.iloc[3]['artists'])
