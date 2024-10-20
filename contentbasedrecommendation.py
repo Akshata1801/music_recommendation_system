@@ -88,7 +88,7 @@ def hybrid_recommendations(input_song_name, factor, num_recommendations=5, alpha
         'popularity': weighted_popularity_score
     }])], ignore_index=True)
 
-    print(hybrid_recommendations.size)
+    print(len(hybrid_recommendations))
 
     # Sort the hybrid recommendations based on weighted popularity score
     hybrid_recommendations = hybrid_recommendations.sort_values(by='popularity', ascending=False)
@@ -110,7 +110,7 @@ def main_area():
 
   if st.button("Recommend"):
     df = hybrid_recommendations(text,text_other)
-    print(df.size)
+    print(len(df))
     print(df)
     st.subheader("Recommended for you")
     # Sample recommendation grid
