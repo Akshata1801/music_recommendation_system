@@ -134,6 +134,7 @@ def main_area():
     with col3:
       st.image("music_11705439.png", caption="Song 3", use_column_width=True)
       st.write("Song 3")
+      print("name : "+df.iloc[2]['name'])
       st.write("Name : " + df.iloc[2]['name'])
       st.write("Artist : "+df.iloc[2]['artists'])
       st.write("Popularity : "+str(df.iloc[2]['popularity']))
