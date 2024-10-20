@@ -35,7 +35,7 @@ def calculate_weighted_popularity(value,factor):
       avg = music_df.loc[:, 'danceability'].mean()
 
     abs_value = abs(value - avg)
-    weight = 1 / (1 + abs_value)
+    weight = 1 / (abs_value)
     return weight
 
 def content_based_recommendations(input_song_name, num_recommendations=5):
