@@ -95,7 +95,7 @@ def hybrid_recommendations(input_song_name, factor, num_recommendations=5, alpha
 
     # Remove the input song from the recommendations
     hybrid_recommendations = hybrid_recommendations[hybrid_recommendations['name'] != input_song_name]
-
+    print("after removing input song "+str(len(hybrid_recommendations)))
 
     return hybrid_recommendations
 
