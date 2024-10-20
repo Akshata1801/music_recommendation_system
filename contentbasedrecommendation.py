@@ -34,7 +34,7 @@ def calculate_weighted_popularity(value,factor):
     else:
       avg = music_df.loc[:, 'danceability'].mean()
 
-    abs_value = abs(value - avg)
+    abs_value = abs(avg - value)
     weight = 1 / (abs_value)
     return weight
 
@@ -77,7 +77,7 @@ def hybrid_recommendations(input_song_name, factor, num_recommendations=5, alpha
     popularity_score = music_df.loc[music_df['name'] == input_song_name, 'popularity'].values[0]
 
     # Calculate the weighted popularity score
-    weighted_popularity_score = popularity_score * calculate_weighted_popularity(music_df.loc[music_df['name'] == input_song_name, 'release_date'].values[0],factor)
+    weighted_popularity_score = popularity_score * calculate_weighted_popularity(music_df.loc[music_df['name'] == input_song_name, factor].values[0],factor)
 
     # Combine content-based and popularity-based recommendations based on weighted popularity
     hybrid_recommendations = content_based_rec
