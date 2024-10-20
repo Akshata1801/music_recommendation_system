@@ -111,6 +111,7 @@ def main_area():
   if st.button("Recommend"):
     df = hybrid_recommendations(text,text_other)
     print(df.size)
+    print(df)
     st.subheader("Recommended for you")
     # Sample recommendation grid
     col1, col2, col3, col4, col5 = st.columns(5)
