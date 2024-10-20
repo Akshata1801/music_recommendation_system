@@ -123,54 +123,12 @@ def main_area():
       for i in range(ncol):
         col = cols[i%wcol]
         with col:
-          st.image("music_11705439.png", caption="Song 1", use_column_width=True)
-          st.write("Song "+str(i))
+          st.image("music_11705439.png", caption="Song", use_column_width=True)
+          st.write("Song "+str(i+1))
           st.write("Name : " + df.iloc[i]['name'])
           st.write("Artist : "+df.iloc[i]['artists'])
           st.write("Popularity : "+str(df.iloc[i]['popularity']))
 
-    # # Sample recommendation grid
-    # col1, col2, col3, col4, col5 = st.columns(5)
-    # # Song Card 1
-    # with col1:
-    #   st.image("music_11705439.png", caption="Song 1", use_column_width=True)
-    #   st.write("Song 1")
-    #   st.write("Name : " + df.iloc[0]['name'])
-    #   st.write("Artist : "+df.iloc[0]['artists'])
-    #   st.write("Popularity : "+str(df.iloc[0]['popularity']))
-    
-    # # Song Card 2
-    # with col2:
-    #   st.image("music_11705439.png", caption="Song 2", use_column_width=True)
-    #   st.write("Song 2")
-    #   st.write("Name : " + df.iloc[1]['name'])
-    #   st.write("Artist : "+df.iloc[1]['artists'])
-    #   st.write("Popularity : "+str(df.iloc[1]['popularity']))
-    
-    # # Song Card 3
-    # with col3:
-    #   st.image("music_11705439.png", caption="Song 3", use_column_width=True)
-    #   st.write("Song 3")
-    #   print("name : "+df.iloc[2]['name'])
-    #   st.write("Name : " + df.iloc[2]['name'])
-    #   st.write("Artist : "+df.iloc[2]['artists'])
-    #   st.write("Popularity : "+str(df.iloc[2]['popularity']))
-    
-    # # Song Card 4
-    # with col4:
-    #   st.image("music_11705439.png", caption="Song 4", use_column_width=True)
-    #   st.write("Song 4")
-    #   st.write("Name : " + df.iloc[3]['name'])
-    #   st.write("Artist : "+df.iloc[3]['artists'])
-    #   st.write("Popularity : "+str(df.iloc[3]['popularity']))
-
-    # # Song Card 5
-    # with col5:
-    #   st.image("music_11705439.png", caption="Song 5", use_column_width=True)
-    #   st.write("Song 5")
-    #   st.write("Name : " + df.iloc[4]['name'])
-    #   st.write("Artist : "+df.iloc[4]['artists'])
-    #   st.write("Popularity : "+str(df.iloc[4]['popularity']))
 
 # --------- Footer ---------
 def footer():
