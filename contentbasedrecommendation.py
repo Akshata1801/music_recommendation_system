@@ -25,16 +25,17 @@ music_features = music_df[['danceability',
 music_features_scaled = scaler.fit_transform(music_features)
 music_features_scaled[np.isnan(music_features_scaled)]=0
 
-# Function to calculate weighted popularity scores based on release date
-def calculate_weighted_popularity(release_date):
-    # Convert the release date to datetime object
-    release_date = datetime.strptime(release_date, '%Y-%m-%d')
+# Function to calculate weighted popularity scores based on given factors by user
+def calculate_weighted_popularity(value,factor):
+    if factor == 'loudness':
+      avg = music_df.loc[:, 'loudness'].mean()
+    elif factor == 'tempo':
+      avg = music_df.loc[:, 'tempo'].mean()
+    else:
+      avg = music_df.loc[:, 'danceability'].mean()
 
-    # Calculate the time span between release date and today's date
-    time_span = datetime.now() - release_date
-
-    # Calculate the weighted popularity score based on time span (e.g., more recent releases have higher weight)
-    weight = 1 / (time_span.days + 1)
+    abs_value = abs(value - avg)
+    weight = 1 / (1 + abs_value)
     return weight
 
 def content_based_recommendations(input_song_name, num_recommendations=5):
@@ -64,7 +65,7 @@ def content_based_recommendations(input_song_name, num_recommendations=5):
     return content_based_recommendations
 
 # a function to get hybrid recommendations based on weighted popularity
-def hybrid_recommendations(input_song_name, num_recommendations=5, alpha=0.5):
+def hybrid_recommendations(input_song_name, factor, num_recommendations=5, alpha=0.5):
     if input_song_name not in music_df['name'].values:
         print(f"'{input_song_name}' not found in the dataset. Please enter a valid song name.")
         return
@@ -76,16 +77,16 @@ def hybrid_recommendations(input_song_name, num_recommendations=5, alpha=0.5):
     popularity_score = music_df.loc[music_df['name'] == input_song_name, 'popularity'].values[0]
 
     # Calculate the weighted popularity score
-    weighted_popularity_score = popularity_score * calculate_weighted_popularity(music_df.loc[music_df['name'] == input_song_name, 'release_date'].values[0])
+    weighted_popularity_score = popularity_score * calculate_weighted_popularity(music_df.loc[music_df['name'] == input_song_name, 'release_date'].values[0],factor)
 
     # Combine content-based and popularity-based recommendations based on weighted popularity
     hybrid_recommendations = content_based_rec
-    hybrid_recommendations = hybrid_recommendations.append({
+    hybrid_recommendations = pd.concat([hybrid_recommendations, pd.DataFrame([{
         'name': input_song_name,
         'artists': music_df.loc[music_df['name'] == input_song_name, 'artists'].values[0],
         'release_date': music_df.loc[music_df['name'] == input_song_name, 'release_date'].values[0],
         'popularity': weighted_popularity_score
-    }, ignore_index=True)
+    }])], ignore_index=True)
 
     # Sort the hybrid recommendations based on weighted popularity score
     hybrid_recommendations = hybrid_recommendations.sort_values(by='popularity', ascending=False)
@@ -102,9 +103,11 @@ def main_area():
   st.subheader("Welcome back! Discover your next favorite song")
   text = st.selectbox('Select song you want recommendation for', 
                     music_df['name'].values)
+  text_other = st.selectbox('Select on what basis, you would prefer song recommendation', 
+                     ("tempo", "danceability", "loudness"))
 
   if st.button("Recommend"):
-    df = hybrid_recommendations(text)
+    df = hybrid_recommendations(text,text_other)
     st.subheader("Recommended for you")
     # Sample recommendation grid
     col1, col2, col3, col4, col5 = st.columns(5)
@@ -122,7 +125,7 @@ def main_area():
       st.write("Song 2")
       st.write("Name : " + df.iloc[1]['name'])
       st.write("Artist : "+df.iloc[1]['artists'])
-      st.write("popularity : "+str(df.iloc[1]['popularity']))
+      st.write("Popularity : "+str(df.iloc[1]['popularity']))
     
     # Song Card 3
     with col3:
@@ -130,7 +133,7 @@ def main_area():
       st.write("Song 3")
       st.write("Name : " + df.iloc[2]['name'])
       st.write("Artist : "+df.iloc[2]['artists'])
-      st.write("popularity : "+str(df.iloc[2]['popularity']))
+      st.write("Popularity : "+str(df.iloc[2]['popularity']))
     
     # Song Card 4
     with col4:
@@ -138,7 +141,7 @@ def main_area():
       st.write("Song 4")
       st.write("Name : " + df.iloc[3]['name'])
       st.write("Artist : "+df.iloc[3]['artists'])
-      st.write("popularity : "+str(df.iloc[3]['popularity']))
+      st.write("Popularity : "+str(df.iloc[3]['popularity']))
 
     # Song Card 5
     with col5:
@@ -146,7 +149,7 @@ def main_area():
       st.write("Song 5")
       st.write("Name : " + df.iloc[4]['name'])
       st.write("Artist : "+df.iloc[4]['artists'])
-      st.write("popularity : "+str(df.iloc[4]['popularity']))
+      st.write("Popularity : "+str(df.iloc[4]['popularity']))
 
 # --------- Footer ---------
 def footer():
