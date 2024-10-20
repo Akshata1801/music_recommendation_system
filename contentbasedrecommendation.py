@@ -25,6 +25,18 @@ music_features = music_df[['danceability',
 music_features_scaled = scaler.fit_transform(music_features)
 music_features_scaled[np.isnan(music_features_scaled)]=0
 
+# Function to calculate weighted popularity scores based on release date
+def calculate_weighted_popularity(release_date):
+    # Convert the release date to datetime object
+    release_date = datetime.strptime(release_date, '%Y-%m-%d')
+
+    # Calculate the time span between release date and today's date
+    time_span = datetime.now() - release_date
+
+    # Calculate the weighted popularity score based on time span (e.g., more recent releases have higher weight)
+    weight = 1 / (time_span.days + 1)
+    return weight
+
 def content_based_recommendations(input_song_name, num_recommendations=5):
     if input_song_name not in music_df['name'].values:
         print(f"'{input_song_name}' not found in the dataset. Please enter a valid song name.")
@@ -51,6 +63,39 @@ def content_based_recommendations(input_song_name, num_recommendations=5):
 
     return content_based_recommendations
 
+# a function to get hybrid recommendations based on weighted popularity
+def hybrid_recommendations(input_song_name, num_recommendations=5, alpha=0.5):
+    if input_song_name not in music_df['name'].values:
+        print(f"'{input_song_name}' not found in the dataset. Please enter a valid song name.")
+        return
+
+    # Get content-based recommendations
+    content_based_rec = content_based_recommendations(input_song_name, num_recommendations)
+
+    # Get the popularity score of the input song
+    popularity_score = music_df.loc[music_df['name'] == input_song_name, 'popularity'].values[0]
+
+    # Calculate the weighted popularity score
+    weighted_popularity_score = popularity_score * calculate_weighted_popularity(music_df.loc[music_df['name'] == input_song_name, 'release_date'].values[0])
+
+    # Combine content-based and popularity-based recommendations based on weighted popularity
+    hybrid_recommendations = content_based_rec
+    hybrid_recommendations = hybrid_recommendations.append({
+        'name': input_song_name,
+        'artists': music_df.loc[music_df['name'] == input_song_name, 'artists'].values[0],
+        'release_date': music_df.loc[music_df['name'] == input_song_name, 'release_date'].values[0],
+        'popularity': weighted_popularity_score
+    }, ignore_index=True)
+
+    # Sort the hybrid recommendations based on weighted popularity score
+    hybrid_recommendations = hybrid_recommendations.sort_values(by='popularity', ascending=False)
+
+    # Remove the input song from the recommendations
+    hybrid_recommendations = hybrid_recommendations[hybrid_recommendations['name'] != input_song_name]
+
+
+    return hybrid_recommendations
+
 def main_area():
   # Header Section
   st.title("🎵 Paigeonn Music Recommendation 🎶")
@@ -59,7 +104,7 @@ def main_area():
                     music_df['name'].values)
 
   if st.button("Recommend"):
-    df = content_based_recommendations(text)
+    df = hybrid_recommendations(text)
     st.subheader("Recommended for you")
     # Sample recommendation grid
     col1, col2, col3, col4, col5 = st.columns(5)
